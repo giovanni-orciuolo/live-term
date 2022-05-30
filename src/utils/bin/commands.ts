@@ -3,7 +3,6 @@
 import * as bin from './index';
 import config from '../../../config.json';
 
-// Help
 export const help = async (args: string[]): Promise<string> => {
   const commands = Object.keys(bin).sort().join(', ');
   var c = '';
@@ -22,20 +21,31 @@ Type 'sumfetch' to display summary.
 `;
 };
 
-// Redirection
-export const repo = async (args: string[]): Promise<string> => {
-  window.open(`${config.repo}`);
-  return 'Opening Github repository...';
+export const about = async (args: string[]): Promise<string> => {
+  return `Hi, I am ${config.name}. Welcome to my website!
+I work as the Lead Software Engineer at <a href="https://overzoom.it" target="_blank">Overzoom</a>, specializing in REST API development and backend technologies.
+I have over 5 years of experience in the field, and I'm always looking for new interesting challenges!
+
+To see a comprehensive list of my skills, type 'skills'.
+To see a list of projects I've worked on and currently working on, type 'projects'.
+To download my CV, type 'resume'.
+To visit my GitHub profile, type 'github' or <a href="https://github.com/giovanni-orciuolo">click here</a>.
+To visit my LinkedIn profile, type 'linkedin' or <a href="https://www.linkedin.com/in/giovanni-orciuolo">click here</a>.
+To open my blog (written in Italian), type 'blog'.`;
 };
 
-// About
-export const about = async (args: string[]): Promise<string> => {
-  return `Hi, I am ${config.name}. 
-Welcome to my website!
-More about me:
-'sumfetch' - short summary.
-'resume' - my latest resume.
-'readme' - my github readme.`;
+export const skills = async (args: string[]): Promise<string> => {
+  return `Programming languages: C, C++, C#, Go, TypeScript, Java, Kotlin, Python, Dart.
+Learning: Rust and Elixir.
+Libraries, frameworks, etc: React, Angular, Svelte, Flutter, NodeJS (Express/Fastify), Mongoose.
+Databases: MongoDB if I need NoSQL, PostgreSQL if I need SQL.
+IDE and tools: VS Code, IntelliJ IDEA, WebStorm, Goland, Postman, Sublime Text.
+`;
+}
+
+export const blog = async (args: string[]): Promise<string> => {
+  window.open(`https://blog.or2.life`);
+  return `Opening my blog...`;
 };
 
 export const resume = async (args: string[]): Promise<string> => {
@@ -43,16 +53,6 @@ export const resume = async (args: string[]): Promise<string> => {
   return 'Opening resume...';
 };
 
-// Donate
-export const donate = async (args: string[]): Promise<string> => {
-  return `thank you for your interest. 
-here are the ways you can support my work:
-- <u><a class="text-light-blue dark:text-dark-blue underline" href="${config.donate_urls.paypal}" target="_blank">paypal</a></u>
-- <u><a class="text-light-blue dark:text-dark-blue underline" href="${config.donate_urls.patreon}" target="_blank">patreon</a></u>
-`;
-};
-
-// Contact
 export const email = async (args: string[]): Promise<string> => {
   window.open(`mailto:${config.email}`);
   return `Opening mailto:${config.email}...`;
@@ -61,37 +61,20 @@ export const email = async (args: string[]): Promise<string> => {
 export const github = async (args: string[]): Promise<string> => {
   window.open(`https://github.com/${config.social.github}/`);
 
-  return 'Opening github...';
+  return 'Opening GitHub...';
 };
 
 export const linkedin = async (args: string[]): Promise<string> => {
   window.open(`https://www.linkedin.com/in/${config.social.linkedin}/`);
 
-  return 'Opening linkedin...';
+  return 'Opening LinkedIn...';
 };
 
-// Search
 export const google = async (args: string[]): Promise<string> => {
   window.open(`https://google.com/search?q=${args.join(' ')}`);
-  return `Searching google for ${args.join(' ')}...`;
+  return `Searching Google for ${args.join(' ')}...`;
 };
 
-export const duckduckgo = async (args: string[]): Promise<string> => {
-  window.open(`https://duckduckgo.com/?q=${args.join(' ')}`);
-  return `Searching duckduckgo for ${args.join(' ')}...`;
-};
-
-export const bing = async (args: string[]): Promise<string> => {
-  window.open(`https://bing.com/search?q=${args.join(' ')}`);
-  return `Wow, really? You are using bing for ${args.join(' ')}?`;
-};
-
-export const reddit = async (args: string[]): Promise<string> => {
-  window.open(`https://www.reddit.com/search/?q=${args.join(' ')}`);
-  return `Searching reddit for ${args.join(' ')}...`;
-};
-
-// Typical linux commands
 export const echo = async (args: string[]): Promise<string> => {
   return args.join(' ');
 };
@@ -101,36 +84,15 @@ export const whoami = async (args: string[]): Promise<string> => {
 };
 
 export const ls = async (args: string[]): Promise<string> => {
-  return `a
-bunch
-of
-fake
-directories`;
+  return ``;
 };
 
 export const cd = async (args: string[]): Promise<string> => {
-  return `unfortunately, i cannot afford more directories.
-if you want to help, you can type 'donate'.`;
+  return `Unfortunately, I cannot afford more directories... :(`;
 };
 
 export const date = async (args: string[]): Promise<string> => {
   return new Date().toString();
-};
-
-export const vi = async (args: string[]): Promise<string> => {
-  return `woah, you still use 'vi'? just try 'vim'.`;
-};
-
-export const vim = async (args: string[]): Promise<string> => {
-  return `'vim' is so outdated. how about 'nvim'?`;
-};
-
-export const nvim = async (args: string[]): Promise<string> => {
-  return `'nvim'? too fancy. why not 'emacs'?`;
-};
-
-export const emacs = async (args?: string[]): Promise<string> => {
-  return `you know what? just use vscode.`;
 };
 
 export const sudo = async (args?: string[]): Promise<string> => {
@@ -141,17 +103,14 @@ export const sudo = async (args?: string[]): Promise<string> => {
 // Banner
 export const banner = (args?: string[]): string => {
   return `
-█████        ███                       ███████████                                   
-░░███        ░░░                       ░█░░░███░░░█                                   
- ░███        ████  █████ █████  ██████ ░   ░███  ░   ██████  ████████  █████████████  
- ░███       ░░███ ░░███ ░░███  ███░░███    ░███     ███░░███░░███░░███░░███░░███░░███ 
- ░███        ░███  ░███  ░███ ░███████     ░███    ░███████  ░███ ░░░  ░███ ░███ ░███ 
- ░███      █ ░███  ░░███ ███  ░███░░░      ░███    ░███░░░   ░███      ░███ ░███ ░███ 
- ███████████ █████  ░░█████   ░░██████     █████   ░░██████  █████     █████░███ █████
-░░░░░░░░░░░ ░░░░░    ░░░░░     ░░░░░░     ░░░░░     ░░░░░░  ░░░░░     ░░░░░ ░░░ ░░░░░ 
-
-Type 'help' to see the list of available commands.
-Type 'sumfetch' to display summary.
-Type 'repo' or click <u><a class="text-light-blue dark:text-dark-blue underline" href="${config.repo}" target="_blank">here</a></u> for the Github repository.
+   ██████╗ ██████╗ ██████╗ 
+  ██╔═══██╗██╔══██╗╚════██╗
+  ██║   ██║██████╔╝ █████╔╝
+  ██║   ██║██╔══██╗██╔═══╝ 
+  ╚██████╔╝██║  ██║███████╗
+   ╚═════╝ ╚═╝  ╚═╝╚══════╝
+                           
+Type 'about' or 'help' to get started.
+Type 'sumfetch' to display the summary.
 `;
 };
